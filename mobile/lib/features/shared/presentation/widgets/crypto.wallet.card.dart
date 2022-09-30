@@ -88,29 +88,29 @@ class CryptoWalletCard extends StatelessWidget {
                       /// bottom section
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           /// todo => replace with user details
-                          AnimatedRow(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Samples.kSampleUserAvatar
-                                  .avatar(size: 40, circular: true)
-                                  .right(12),
-                              Expanded(
-                                  child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  'Dennis Bilson'.h6(context,
-                                      color: context.colorScheme.onSecondary,
-                                      weight: FontWeight.bold),
-                                  '127* **** **23'.subtitle2(context,
-                                      color: context.colorScheme.onSecondary,
-                                      emphasis: kEmphasisMedium),
-                                ],
-                              )),
-                            ],
+                          Expanded(
+                            child: AnimatedRow(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Samples.kSampleUserAvatar
+                                    .avatar(size: 40, circular: true)
+                                    .right(12),
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    'Dennis Bilson'.h6(context,
+                                        color: context.colorScheme.onSecondary,
+                                        weight: FontWeight.bold),
+                                    '127* **** **23'.subtitle2(context,
+                                        color: context.colorScheme.onSecondary,
+                                        emphasis: kEmphasisMedium),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
 
                           Container(

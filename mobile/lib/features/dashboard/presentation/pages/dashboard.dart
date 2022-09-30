@@ -19,7 +19,8 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    kUseDefaultOverlays(context, statusBarBrightness: Brightness.light);
+    kUseDefaultOverlays(context,
+        statusBarBrightness: context.invertedThemeBrightness);
 
     return MultiBlocListener(
       listeners: [

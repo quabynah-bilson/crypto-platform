@@ -819,10 +819,10 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: "04aeff12636159b6bf7c571c3040969907af23cd"
+      resolved-ref: "75b3ade65e4ee44713c471acdacf93faa41c84a3"
       url: "git://github.com/quabynah-bilson/shared_utils.git"
     source: git
-    version: "0.0.19-dev.19"
+    version: "0.0.21-dev.21"
   shelf:
     dependency: transitive
     description:
