@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mobile/features/shared/presentation/manager/crypto_cubit.dart';
+import 'package:mobile/features/shared/presentation/widgets/crypto.wallet.card.dart';
 import 'package:mobile/utils/constants.dart';
 import 'package:shared_utils/shared_utils.dart';
 
@@ -17,6 +18,8 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
+    kUseDefaultOverlays(context);
+
     return MultiBlocListener(
       listeners: [
         BlocListener(
@@ -41,42 +44,66 @@ class _DashboardPageState extends State<DashboardPage> {
       child: Scaffold(
         body: CustomScrollView(
           shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
           slivers: [
-            SliverSafeArea(
-              sliver: SliverToBoxAdapter(
-                child: AnimatedRow(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    /// logo
-                    Lottie.asset(
-                      kLoadingAnim,
-                      height: 56,
-                      width: 56,
-                      repeat: false,
-                    ),
+            /// header bar (logo, title, user profile image)
+            SliverToBoxAdapter(
+              child: Container(
+                decoration: BoxDecoration(color: context.colorScheme.primary),
+                child: SafeArea(
+                  bottom: false,
+                  child: AnimatedRow(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      /// logo
+                      Lottie.asset(
+                        kLoadingAnim,
+                        height: 56,
+                        width: 56,
+                        repeat: false,
+                      ),
 
-                    /// user details
-                    AnimatedColumn(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        kAppName.subtitle1(context,
-                            color: context.colorScheme.secondary,
-                            weight: FontWeight.w600),
-                        'Hi, Quabynah Jr. 👋🏽'.bodyText1(context),
-                      ],
-                    ),
+                      /// title
+                      kAppName.subtitle1(context,
+                          color: context.colorScheme.onPrimary,
+                          weight: FontWeight.w600),
 
-                    /// action buttons
-                    IconButton(
-                      onPressed: () => context.showCustomDialog(
-                          headerIconAsset: kAppLogo, message: kFeatureUnderDev),
-                      icon: const Icon(Icons.face),
-                    ),
-                  ],
-                ).horizontal(16),
+                      /// user profile
+                      IconButton(
+                        onPressed: () => context.showCustomDialog(
+                            headerIconAsset: kAppLogo,
+                            message: kFeatureUnderDev),
+                        icon: ClipOval(
+                          child: Container(
+                            clipBehavior: Clip.hardEdge,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  color: context.colorScheme.onPrimary,
+                                  width: 2.5),
+                            ),
+                            // todo => replace with user profile image
+                            child:
+                               Samples.kSampleUserAvatar
+                                    .avatar(
+                              size: 56,
+                              circular: true,
+                            ),
+                          ),
+                        ),
+                        iconSize: 48,
+                      ),
+                    ],
+                  ).horizontal(16),
+                ),
               ),
+            ),
+
+            /// wallet balance
+            const SliverPadding(
+              padding: EdgeInsets.fromLTRB(16, 16, 16, 24),
+              sliver: SliverToBoxAdapter(child: CryptoWalletCard()),
             ),
           ],
         ),

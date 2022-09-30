@@ -7,3 +7,9 @@ const kLoadingAnim = 'assets/anim/ethereum.json';
 const kLoadingAnimNetworkUrl =
     'https://assets5.lottiefiles.com/private_files/lf30_gavvxe6v.json';
 const kFeatureUnderDev = 'Feature is under development 😅';
+
+/// samples
+class Samples {
+  static const kSampleUserAvatar =
+      'https://avatars.githubusercontent.com/u/84394923?v=4';
+}

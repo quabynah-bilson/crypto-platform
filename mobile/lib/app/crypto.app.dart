@@ -16,6 +16,9 @@ class CryptoMobileApp extends StatefulWidget {
 
 class _CryptoMobileAppState extends State<CryptoMobileApp> {
   final _router = AppRouter(), _fonts = GoogleFonts.dmMonoTextTheme();
+  late final _lightTheme =
+          kLightTheme(context: context).copyWith(textTheme: _fonts),
+      _darkTheme = kDarkTheme(context: context).copyWith(textTheme: _fonts);
 
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
@@ -24,8 +27,13 @@ class _CryptoMobileAppState extends State<CryptoMobileApp> {
         ],
         child: MaterialApp.router(
           title: kAppName,
-          theme: kLightTheme(context: context).copyWith(textTheme: _fonts),
-          darkTheme: kDarkTheme(context: context).copyWith(textTheme: _fonts),
+          theme: _lightTheme.copyWith(
+            colorScheme: _lightTheme.colorScheme.copyWith(
+              secondary: Colors.amber,
+              onSecondary: const Color(0xff463002),
+            ),
+          ),
+          darkTheme: _darkTheme,
           routerDelegate: _router.delegate(),
           routeInformationParser: _router.defaultRouteParser(),
         ),

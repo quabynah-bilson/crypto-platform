@@ -14,24 +14,28 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage> {
   @override
-  Widget build(BuildContext context) => Scaffold(
-        body: AnimatedColumn(
-          children: [
-            Lottie.asset(kLoadingAnim,
-                height: context.height * 0.2,
-                width: context.width,
-                repeat: false),
-            kAppName.h4(context, weight: FontWeight.w600),
-            kAppDesc.subtitle2(context, alignment: TextAlign.center).top(12),
-          ],
-        ).horizontal(24).centered(),
-        bottomNavigationBar: SafeArea(
-          top: false,
-          child: AppRoundedButton(
-            text: 'Start transacting',
-            onTap: () => context.router.pushAndPopUntil(const DashboardRoute(),
-                predicate: (_) => false),
-          ).centered(),
-        ).fillMaxHeight(context, 0.1),
-      );
+  Widget build(BuildContext context) {
+    kUseDefaultOverlays(context, statusBarBrightness: context.theme.brightness);
+
+    return Scaffold(
+      body: AnimatedColumn(
+        children: [
+          Lottie.asset(kLoadingAnim,
+              height: context.height * 0.2,
+              width: context.width,
+              repeat: false),
+          kAppName.h4(context, weight: FontWeight.w600),
+          kAppDesc.subtitle2(context, alignment: TextAlign.center).top(12),
+        ],
+      ).horizontal(24).centered(),
+      bottomNavigationBar: SafeArea(
+        top: false,
+        child: AppRoundedButton(
+          text: 'Start transacting',
+          onTap: () => context.router
+              .pushAndPopUntil(const DashboardRoute(), predicate: (_) => false),
+        ).centered(),
+      ).fillMaxHeight(context, 0.1),
+    );
+  }
 }
